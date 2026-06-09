@@ -2,6 +2,8 @@
 
 Claude Code environmental impact tracker. Reads local session history and shows energy, GHG, water, metals, and fossil fuel usage via [EcoLogits](https://ecologits.ai).
 
+Also made with Claude code and superpowers.
+
 ## Install
 
 ```
