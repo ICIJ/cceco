@@ -7,7 +7,7 @@ Also made with Claude code and superpowers.
 ## Install
 
 ```
-pipx install cceco
+pipx install icij-cceco
 ```
 
 ## Usage

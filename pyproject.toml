@@ -1,5 +1,5 @@
 [project]
-name = "cceco"
+name = "icij-cceco"
 version = "0.1.0"
 description = "Claude Code environmental impact tracker"
 readme = "README.md"
@@ -29,6 +29,9 @@ cceco = "cceco.cli:main"
 dev = [
     "pytest>=8.0",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["cceco"]
 
 [build-system]
 requires = ["hatchling"]
