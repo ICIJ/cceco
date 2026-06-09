@@ -1,0 +1,35 @@
+[project]
+name = "cceco"
+version = "0.1.0"
+description = "Claude Code environmental impact tracker"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "ICIJ", email = "engineering@icij.org" },
+]
+keywords = ["cli", "claude", "environmental-impact", "carbon", "ai"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+]
+dependencies = [
+    "ecologits>=0.10.2,<0.11.0",
+]
+
+[project.urls]
+Repository = "https://github.com/icij/cceco"
+
+[project.scripts]
+cceco = "cceco.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
