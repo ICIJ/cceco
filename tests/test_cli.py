@@ -69,11 +69,22 @@ def test_outputs_header(capsys):
     assert "5 requests" in out
 
 
-def test_outputs_token_counts(capsys):
+def test_tokens_hidden_by_default(capsys):
     with (
         patch("cceco.cli.read_usage", return_value=(_make_usage(), 1, 1, 0)),
         patch("cceco.cli.compute_impact", return_value=_make_impact()),
         patch("sys.argv", ["cceco"]),
+    ):
+        main()
+    out = capsys.readouterr().out
+    assert "Tokens" not in out
+
+
+def test_outputs_token_counts_with_flag(capsys):
+    with (
+        patch("cceco.cli.read_usage", return_value=(_make_usage(), 1, 1, 0)),
+        patch("cceco.cli.compute_impact", return_value=_make_impact()),
+        patch("sys.argv", ["cceco", "--tokens"]),
     ):
         main()
     out = capsys.readouterr().out

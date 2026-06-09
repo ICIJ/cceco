@@ -39,10 +39,13 @@ def main() -> None:
                         help="Include sessions from this date (inclusive)")
     parser.add_argument("--until", metavar="YYYY-MM-DD",
                         help="Include sessions up to this date (inclusive)")
+    parser.add_argument("--tokens", action="store_true",
+                        help="Show token breakdown per model")
     args = parser.parse_args()
 
     since = _parse_date(args.since, "--since")
     until = _parse_date(args.until, "--until")
+    show_tokens = args.tokens
 
     usage, project_count, session_count, malformed = read_usage(since=since, until=until)
 
@@ -75,9 +78,10 @@ def main() -> None:
     for model, u in sorted(usage.items()):
         bar = "─" * max(0, 54 - len(model) - 4)
         print(f"── {model} {bar}")
-        print(f"Tokens        input: {_fmt_tokens(u.input_tokens)}   output: {_fmt_tokens(u.output_tokens)}")
-        print(f"              cache creation: {_fmt_tokens(u.cache_creation_input_tokens)}   cache read: {_fmt_tokens(u.cache_read_input_tokens)}")
-        print()
+        if show_tokens:
+            print(f"Tokens        input: {_fmt_tokens(u.input_tokens)}   output: {_fmt_tokens(u.output_tokens)}")
+            print(f"              cache creation: {_fmt_tokens(u.cache_creation_input_tokens)}   cache read: {_fmt_tokens(u.cache_read_input_tokens)}")
+            print()
 
         # Tokens requiring GPU compute: input prefill + cache creation + generation.
         # Cache reads are cheap KV-cache lookups and excluded.
